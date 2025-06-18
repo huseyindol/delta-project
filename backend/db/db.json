@@ -1,0 +1,59 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Sandalye",
+      "price": 100,
+      "image": "/assets/images/sandalye.jpeg",
+      "description": "Sandalye Açıklaması",
+      "categoryId": 1,
+      "favorite": false
+    },
+    {
+      "id": 2,
+      "name": "Koltuk",
+      "price": 200,
+      "image": "/assets/images/koltuk.jpeg",
+      "description": "Koltuk Açıklaması",
+      "categoryId": 1,
+      "favorite": false
+    },
+    {
+      "id": 3,
+      "name": "Masa",
+      "price": 300,
+      "image": "/assets/images/masa.jpeg",
+      "description": "Masa Açıklaması",
+      "categoryId": 1,
+      "favorite": false
+    },
+    {
+      "id": 4,
+      "name": "Bilgisayar",
+      "price": 400,
+      "image": "/assets/images/bilgisayar.jpeg",
+      "description": "Bilgisayar Açıklaması",
+      "categoryId": 2,
+      "favorite": false
+    },
+    {
+      "id": 5,
+      "name": "Telefon",
+      "price": 500,
+      "image": "/assets/images/telefon.jpeg",
+      "description": "Telefon Açıklaması",
+      "categoryId": 2,
+      "favorite": false
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Mobilya"
+    },
+    {
+      "id": 2,
+      "name": "Elektronik"
+    }
+  ]
+}
