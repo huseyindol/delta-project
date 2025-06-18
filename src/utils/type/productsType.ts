@@ -8,6 +8,19 @@ export interface Product {
   description: string;
 }
 
+export interface ProductFormValues {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  categoryId: {
+    label: string;
+    value: number;
+  };
+  favorite: boolean;
+  description: string;
+}
+
 export interface Category {
   id: number;
   name: string;
@@ -23,6 +36,6 @@ export interface ProductState {
 }
 
 export interface FilterProducts {
-  searchTerm?: string | "default";
+  searchTerm?: string | 'default';
   categoryId?: number;
 }

@@ -2,6 +2,7 @@ import type {
   Category,
   FilterProducts,
   Product,
+  ProductFormValues,
   ProductState,
 } from '@/utils/type/productsType';
 import type { PayloadAction } from '@reduxjs/toolkit';
@@ -13,7 +14,7 @@ const initialState: ProductState = {
   tempProducts: [],
   categories: [],
   searchTerm: '',
-  filterCategoryId: [],
+  filterCategoryId: [] as number[],
 };
 
 export const productSlice = createSlice({
@@ -35,10 +36,13 @@ export const productSlice = createSlice({
           : product
       );
     },
-    updateProduct: (state, action: PayloadAction<Product>) => {
+    updateProduct: (state, action: PayloadAction<ProductFormValues>) => {
       state.products = state.products.map(product =>
         Number(product.id) === Number(action.payload.id)
-          ? action.payload
+          ? {
+              ...action.payload,
+              categoryId: Number(action.payload.categoryId.value),
+            }
           : product
       );
     },
@@ -46,9 +50,13 @@ export const productSlice = createSlice({
       const { searchTerm, categoryId } = action.payload;
 
       if (categoryId) {
-        state.filterCategoryId = state.filterCategoryId.includes(categoryId)
-          ? state.filterCategoryId.filter(id => id !== categoryId)
-          : [...state.filterCategoryId, categoryId];
+        state.filterCategoryId = state.filterCategoryId.includes(
+          Number(categoryId)
+        )
+          ? state.filterCategoryId.filter(
+              id => Number(id) !== Number(categoryId)
+            )
+          : [...new Set([...state.filterCategoryId, Number(categoryId)])];
       }
 
       state.searchTerm =
@@ -58,7 +66,7 @@ export const productSlice = createSlice({
         .filter(product => {
           return state.filterCategoryId.length === 0
             ? true
-            : state.filterCategoryId.includes(product.categoryId);
+            : state.filterCategoryId.includes(Number(product.categoryId));
         })
         .filter(product => {
           const trimmedValue = state.searchTerm?.trim().toLowerCase() || '';

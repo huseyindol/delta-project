@@ -1,7 +1,7 @@
 import { selectProducts, setFavorite } from "@/store/product/productSlice";
 import { useAppDispatch, useAppSelector } from "@/utils/store/hooks";
 import type { Product } from "@/utils/type/productsType";
-import { ArrowLeftOutlined, EditOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, EditOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
 import { Button, Flex, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -44,14 +44,15 @@ const ProductDetail: React.FC = () => {
           <Typography.Title level={3}>{product?.name}</Typography.Title>
           <Typography.Text>{product?.price}</Typography.Text>
           <Typography.Text>{product?.description}</Typography.Text>
-          <Button
-            type="primary"
-            onClick={() => {
+          {product?.favorite ? (
+            <StarFilled style={{ fontSize: 24 }} onClick={() => {
               dispatch(setFavorite(product.id));
-            }}
-          >
-            {product?.favorite ? "Remove from favorite" : "Add to favorite"}
-          </Button>
+            }} />
+          ) : (
+            <StarOutlined style={{ fontSize: 24 }} onClick={() => {
+              dispatch(setFavorite(product.id));
+            }} />
+          )}
         </Flex>
       </Flex>
     </Flex>

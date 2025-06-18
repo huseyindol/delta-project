@@ -1,5 +1,6 @@
 import { filterProducts, selectProducts } from "@/store/product/productSlice";
 import { useAppDispatch, useAppSelector } from "@/utils/store/hooks";
+import type { Category } from "@/utils/type/productsType";
 import { Checkbox, Divider, Flex, Typography, type CheckboxProps } from "antd";
 import React, { useEffect } from "react";
 
@@ -21,7 +22,7 @@ const SidebarCategories: React.FC = () => {
     <>
       <Typography.Title level={5}>Kategoriler</Typography.Title>
       <Divider />
-      {categories.map((category) => (
+      {categories.map((category: Category) => (
         <Flex key={category.id} justify="space-between" align="center">
           <Checkbox onChange={(e) => onChange(e)} value={category.id}>
             <Typography.Text>{category.name}</Typography.Text>

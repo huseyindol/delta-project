@@ -1,6 +1,6 @@
 import { selectProducts, updateProduct } from "@/store/product/productSlice";
 import { useAppDispatch, useAppSelector } from "@/utils/store/hooks";
-import type { Product } from "@/utils/type/productsType";
+import type { Category, Product, ProductFormValues } from "@/utils/type/productsType";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Button, Flex, Form, Input, Select, Typography } from "antd";
 import axios, { type AxiosResponse } from "axios";
@@ -17,7 +17,7 @@ const ProductEdit: React.FC = () => {
   useEffect(() => {
     if (products.length > 0) {
       setProduct(
-        products.filter((product) => Number(product.id) === Number(id))[0],
+        products.filter((product: Product) => Number(product.id) === Number(id))[0],
       );
     } else {
       axios
@@ -28,9 +28,21 @@ const ProductEdit: React.FC = () => {
     }
   }, [products, id]);
 
-  const handleSubmit = (values: Product) => {
-    dispatch(updateProduct(values));
+  const handleSubmit = (values: ProductFormValues) => {
+    dispatch(updateProduct({
+      ...values,
+      id: Number(id),
+    }));
+    navigate(`/products/${id}`);
   };
+
+  const initialFormValues = product ? {
+    ...product,
+    categoryId: {
+      label: categories.find((cat: Category) => Number(cat.id) === Number(product.categoryId))?.name,
+      value: Number(product.categoryId)
+    }
+  } : {};
 
   return product ? (
     <Flex vertical gap={16} style={{ padding: "16px" }}>
@@ -53,7 +65,7 @@ const ProductEdit: React.FC = () => {
           wrapperCol={{ flex: 1 }}
           colon={false}
           onFinish={handleSubmit}
-          initialValues={product}
+          initialValues={initialFormValues}
         >
           <Form.Item
             label="Product Image"
@@ -62,8 +74,6 @@ const ProductEdit: React.FC = () => {
           >
             <Input
               placeholder="Enter product image"
-              value={product?.image}
-              defaultValue={product?.image}
             />
           </Form.Item>
 
@@ -74,8 +84,6 @@ const ProductEdit: React.FC = () => {
           >
             <Input
               placeholder="Enter product name"
-              value={product?.name}
-              defaultValue={product?.name}
             />
           </Form.Item>
 
@@ -86,8 +94,6 @@ const ProductEdit: React.FC = () => {
           >
             <Input
               placeholder="Enter product price"
-              value={product?.price}
-              defaultValue={product?.price}
             />
           </Form.Item>
 
@@ -98,8 +104,6 @@ const ProductEdit: React.FC = () => {
           >
             <Input.TextArea
               placeholder="Enter product description"
-              value={product?.description}
-              defaultValue={product?.description}
             />
           </Form.Item>
 
@@ -111,11 +115,11 @@ const ProductEdit: React.FC = () => {
           >
             <Select
               placeholder="Select a category"
-              value={product?.categoryId}
-              defaultValue={product?.categoryId}
+              labelInValue
+              value={product.categoryId}
             >
-              {categories.map((category) => (
-                <Select.Option value={category.id}>
+              {categories.map((category: Category) => (
+                <Select.Option key={category.id} value={category.id}>
                   {category.name}
                 </Select.Option>
               ))}

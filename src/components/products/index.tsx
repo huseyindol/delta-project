@@ -2,6 +2,7 @@ import ProductCard from "@/components/products/ProductCard";
 import SearchBoxInput from "@/components/shared/ui/input/SearchBoxInput";
 import { selectProducts } from "@/store/product/productSlice";
 import { useAppSelector } from "@/utils/store/hooks";
+import type { Product } from "@/utils/type/productsType";
 import { Flex, Row, Typography } from "antd";
 import React from "react";
 
@@ -21,7 +22,7 @@ const Products: React.FC = () => {
         style={{ margin: "0 16px" }}
       >
         <Row gutter={16} style={{ rowGap: 32, flex: 1 }}>
-          {tempProducts.map((product) => (
+          {tempProducts.map((product: Product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </Row>
