@@ -55,5 +55,39 @@
       "id": 2,
       "name": "Elektronik"
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "fullName": "John Wilson",
+      "name": "John",
+      "surname": "Wilson",
+      "email": "john.wilson@example.com",
+      "phone": "1234567890"
+    },
+    {
+      "id": 2,
+      "fullName": "Jane Austin",
+      "name": "Jane",
+      "surname": "Austin",
+      "email": "jane.austin@example.com",
+      "phone": "1234567890"
+    },
+    {
+      "id": 3,
+      "fullName": "John Smith",
+      "name": "John",
+      "surname": "Smith",
+      "email": "john.smith@example.com",
+      "phone": "1234567890"
+    },
+    {
+      "id": 4,
+      "fullName": "Scott Anderson",
+      "name": "Scott",
+      "surname": "Anderson",
+      "email": "scott.anderson@example.com",
+      "phone": "1234567890"
+    }
   ]
 }

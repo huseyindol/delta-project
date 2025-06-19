@@ -1,4 +1,5 @@
-import productReducer from '@/store/product/productSlice';
+import productReducer from '@/store/productSlice';
+import userReducer from '@/store/userSlice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // localStorage için
@@ -9,13 +10,17 @@ const productPersistConfig = {
   storage,
   blacklist: ['filterCategoryId', 'searchTerm'],
 };
+// User için özel persist config
+const userPersistConfig = {
+  key: 'user',
+  storage,
+  blacklist: ['searchTerm'],
+};
 
 // Root reducer oluştur
 const rootReducer = combineReducers({
   product: persistReducer(productPersistConfig, productReducer),
-  // posts: postsReducer,
-  // comments: commentsReducer,
-  // users: usersReducer,
+  user: persistReducer(userPersistConfig, userReducer),
 });
 
 export const store = configureStore({

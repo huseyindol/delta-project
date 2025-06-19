@@ -1,48 +1,23 @@
-import { getProductById } from "@/services/productServices";
-import { selectProducts, updateProduct } from "@/store/productSlice";
-import { useAppDispatch, useAppSelector } from "@/utils/store/hooks";
-import type { Category, Product, ProductFormValues } from "@/utils/type/productsType";
+import { addProduct, selectProducts } from '@/store/productSlice';
+import { useAppDispatch, useAppSelector } from '@/utils/store/hooks';
+import type { Category, ProductFormValues } from '@/utils/type/productsType';
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Button, Flex, Form, Input, Select, Typography } from "antd";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Button, Flex, Form, Input, Select, Typography } from 'antd';
+import type React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const ProductEdit: React.FC = () => {
-  const { products, categories } = useAppSelector(selectProducts);
-  const dispatch = useAppDispatch();
+const ProductAdd: React.FC = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const [product, setProduct] = useState<Product | null>(null);
-
-  useEffect(() => {
-    if (products.length > 0) {
-      setProduct(
-        products.filter((product: Product) => Number(product.id) === Number(id))[0],
-      );
-    } else {
-      getProductById(id as string).then((res) => {
-        setProduct(res as Product);
-      });
-    }
-  }, [products, id]);
-
+  const dispatch = useAppDispatch();
+  const { categories } = useAppSelector(selectProducts);
   const handleSubmit = (values: ProductFormValues) => {
-    dispatch(updateProduct({
+    console.log(values);
+    dispatch(addProduct({
       ...values,
-      id: Number(id),
     }));
     navigate(-1);
   };
-
-  const initialFormValues = product ? {
-    ...product,
-    categoryId: {
-      label: categories.find((cat: Category) => Number(cat.id) === Number(product.categoryId))?.name,
-      value: Number(product.categoryId)
-    }
-  } : {};
-
-  return product ? (
+  return (
     <Flex vertical gap={16} style={{ flex: 1, width: "100%", padding: "16px" }}>
       <Flex gap={16} align="baseline">
         <Button
@@ -52,9 +27,8 @@ const ProductEdit: React.FC = () => {
             navigate(-1);
           }}
         ></Button>
-        <Typography.Title level={3} style={{ margin: 0 }}>
-          Product Edit
-        </Typography.Title>
+        <Typography.Title level={3} style={{ margin: 0 }}>Product Add</Typography.Title>
+
       </Flex>
       <Flex gap={16} style={{ margin: "0 16px" }}>
         <Form
@@ -63,7 +37,6 @@ const ProductEdit: React.FC = () => {
           wrapperCol={{ flex: 1 }}
           colon={false}
           onFinish={handleSubmit}
-          initialValues={initialFormValues}
         >
           <Form.Item
             label="Product Image"
@@ -114,7 +87,6 @@ const ProductEdit: React.FC = () => {
             <Select
               placeholder="Select a category"
               labelInValue
-              value={product.categoryId}
             >
               {categories.map((category: Category) => (
                 <Select.Option key={category.id} value={category.id}>
@@ -132,9 +104,7 @@ const ProductEdit: React.FC = () => {
         </Form>
       </Flex>
     </Flex>
-  ) : (
-    <div>Product not found</div>
-  );
-};
+  )
+}
 
-export default ProductEdit;
+export default ProductAdd

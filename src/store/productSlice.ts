@@ -1,3 +1,4 @@
+import type { RootState } from '@/utils/store/store';
 import type {
   Category,
   FilterProducts,
@@ -7,7 +8,6 @@ import type {
 } from '@/utils/type/productsType';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { RootState } from '../../utils/store/store';
 
 const initialState: ProductState = {
   products: [],
@@ -45,6 +45,24 @@ export const productSlice = createSlice({
             }
           : product
       );
+    },
+    deleteProduct: (state, action: PayloadAction<number>) => {
+      state.products = state.products.filter(
+        product => Number(product.id) !== Number(action.payload)
+      );
+      state.tempProducts = state.tempProducts.filter(
+        product => Number(product.id) !== Number(action.payload)
+      );
+    },
+    addProduct: (state, action: PayloadAction<ProductFormValues>) => {
+      state.products = [
+        ...state.products,
+        {
+          ...action.payload,
+          id: state.products.length + 1,
+          categoryId: Number(action.payload.categoryId.value),
+        },
+      ];
     },
     filterProducts: (state, action: PayloadAction<FilterProducts>) => {
       const { searchTerm, categoryId } = action.payload;
@@ -84,6 +102,8 @@ export const {
   filterProducts,
   setFavorite,
   updateProduct,
+  deleteProduct,
+  addProduct,
 } = productSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

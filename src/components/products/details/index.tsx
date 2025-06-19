@@ -1,4 +1,4 @@
-import { selectProducts, setFavorite } from "@/store/product/productSlice";
+import { selectProducts, setFavorite } from "@/store/productSlice";
 import { useAppDispatch, useAppSelector } from "@/utils/store/hooks";
 import type { Product } from "@/utils/type/productsType";
 import { ArrowLeftOutlined, EditOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
@@ -15,12 +15,12 @@ const ProductDetail: React.FC = () => {
 
   useEffect(() => {
     setProduct(
-      products.filter((product) => Number(product.id) === Number(id))[0],
+      products.filter((product: Product) => Number(product.id) === Number(id))[0],
     );
   }, [products, id]);
 
   return product ? (
-    <Flex vertical gap={16} style={{ padding: "16px" }}>
+    <Flex vertical gap={16} style={{ flex: 1, width: "100%", padding: "16px" }}>
       <Flex justify="space-between" align="center">
         <Button
           type="primary"

@@ -1,4 +1,10 @@
+import ProductAdd from "@/components/products/add/index.tsx";
 import ErrorBoundary from "@/components/shared/error/ErrorBoundary.tsx";
+import UserAdd from "@/components/users/add/index.tsx";
+import UserDetail from "@/components/users/details/index.tsx";
+import UserEdit from "@/components/users/edit/index.tsx";
+import Users from "@/components/users/index.tsx";
+import UserLayout from "@/layouts/UserLayout.tsx";
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -23,24 +29,52 @@ export const router = createBrowserRouter([
         index: true,
       },
       {
-        path: "products/:id",
-        element: <ProductDetail />,
+        path: "products",
+        element: <ProductLayout />,
+        errorElement: <ErrorBoundary />,
+        children: [
+          {
+            element: <Products />,
+            index: true,
+          },
+          {
+            path: "add",
+            element: <ProductAdd />,
+          },
+          {
+            path: ":id",
+            element: <ProductDetail />,
+          },
+          {
+            path: ":id/edit",
+            element: <ProductEdit />,
+          },
+        ],
       },
       {
-        path: "products/:id/edit",
-        element: <ProductEdit />,
-      },
+        path: "users",
+        element: <UserLayout />,
+        errorElement: <ErrorBoundary />,
+        children: [
+          {
+            element: <Users />,
+            index: true,
+          },
+          {
+            path: "add",
+            element: <UserAdd />,
+          },
+          {
+            path: ":id",
+            element: <UserDetail />,
+          },
+          {
+            path: ":id/edit",
+            element: <UserEdit />,
+          },
+        ],
+      }
     ],
   },
-  {
-    path: "products",
-    element: <ProductLayout />,
-    errorElement: <ErrorBoundary />,
-    children: [
-      {
-        element: <Products />,
-        index: true,
-      },
-    ],
-  },
+
 ]);

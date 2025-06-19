@@ -1,5 +1,5 @@
 import useDebounce from "@/hooks/useDebounce";
-import { filterProducts } from "@/store/product/productSlice";
+import { filterUsers } from "@/store/userSlice";
 import { useAppDispatch } from "@/utils/store/hooks";
 import { Input } from "antd";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ const SearchBoxInput = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   useEffect(() => {
-    dispatch(filterProducts({ searchTerm: debouncedSearchTerm as string }));
+    dispatch(filterUsers({ searchTerm: debouncedSearchTerm as string }));
   }, [debouncedSearchTerm]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
