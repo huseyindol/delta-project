@@ -19,16 +19,17 @@ const ProductAdd: React.FC = () => {
   };
   return (
     <Flex vertical gap={16} style={{ flex: 1, width: "100%", padding: "16px" }}>
-      <Flex gap={16} align="baseline">
-        <Button
-          type="primary"
-          icon={<ArrowLeftOutlined />}
-          onClick={() => {
-            navigate(-1);
-          }}
-        ></Button>
-        <Typography.Title level={3} style={{ margin: 0 }}>Product Add</Typography.Title>
-
+      <Flex vertical gap={16}>
+        <Typography.Title level={3}>Product Add</Typography.Title>
+        <Flex gap={32} justify="space-between">
+          <Button
+            type="primary"
+            icon={<ArrowLeftOutlined />}
+            onClick={() => {
+              navigate(-1);
+            }}
+          ></Button>
+        </Flex>
       </Flex>
       <Flex gap={16} style={{ margin: "0 16px" }}>
         <Form

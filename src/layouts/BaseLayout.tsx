@@ -2,8 +2,7 @@ import Header from "@/components/shared/header";
 import {
   HomeOutlined,
   MailOutlined,
-  SettingOutlined,
-  UserOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import { Layout, Menu, type MenuProps } from "antd";
 import React, { useState } from "react";
@@ -29,11 +28,6 @@ const items: MenuItem[] = [
     key: "/users",
     icon: <UserOutlined />,
   },
-  {
-    label: "Ayarlar",
-    key: "/settings",
-    icon: <SettingOutlined />,
-  },
 ];
 
 const BaseLayout: React.FC = () => {
@@ -51,7 +45,7 @@ const BaseLayout: React.FC = () => {
       <Header />
       <Content style={{ flex: 1, width: "100%" }}>
         <Layout>
-          <Sider width={250} style={{ height: "88vh" }}>
+          <Sider width={250} style={{ height: "88vh", zIndex: 1000 }} breakpoint="md" collapsedWidth="0" defaultCollapsed={true} zeroWidthTriggerStyle={{ top: -54 }}>
             <Menu
               theme="dark"
               mode="vertical"

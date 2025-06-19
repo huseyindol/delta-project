@@ -2,7 +2,7 @@ import { selectUsers } from "@/store/userSlice";
 import { useAppSelector } from "@/utils/store/hooks";
 import type { User } from "@/utils/type/userType";
 import { ArrowLeftOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Descriptions, Flex } from "antd";
+import { Button, Descriptions, Flex, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -20,25 +20,28 @@ const UserDetail: React.FC = () => {
 
   return user.length > 0 ? (
     <Flex vertical gap={16} style={{ flex: 1, width: "100%", padding: "16px" }}>
-      <Flex justify="space-between" align="center">
-        <Button
-          type="primary"
-          icon={<ArrowLeftOutlined />}
-          onClick={() => {
-            navigate("/users");
-          }}
-        ></Button>
-        <Button
-          type="primary"
-          icon={<EditOutlined />}
-          onClick={() => {
-            navigate(`/users/${id}/edit`);
-          }}
-        ></Button>
+      <Flex vertical gap={16}>
+        <Typography.Title level={3}>User Detail</Typography.Title>
+        <Flex gap={32} justify="space-between">
+          <Button
+            type="primary"
+            icon={<ArrowLeftOutlined />}
+            onClick={() => {
+              navigate("/users");
+            }}
+          ></Button>
+          <Button
+            type="primary"
+            icon={<EditOutlined />}
+            onClick={() => {
+              navigate(`/users/${id}/edit`);
+            }}
+          ></Button>
+        </Flex>
       </Flex>
       <Flex gap={16} style={{ margin: "0 16px" }}>
         <Flex vertical gap={16}>
-          <Descriptions title="User Info" items={[{
+          <Descriptions title=" " items={[{
             label: 'FullName',
             span: 3,
             children: user[0].fullName,

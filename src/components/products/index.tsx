@@ -17,7 +17,7 @@ const Products: React.FC = () => {
       title: 'Image',
       dataIndex: 'image',
       key: 'image',
-      render: (text) => <Avatar src={text} size={64} />,
+      render: (text) => <Avatar src={text} size={48} />,
     },
     {
       title: 'Name',
@@ -43,6 +43,7 @@ const Products: React.FC = () => {
     {
       title: 'Action',
       key: 'action',
+      fixed: 'right',
       render: (record) => (
         <Space size="middle">
           <Link to={`/products/${record.id}`} style={{ color: "lightblue" }}><EyeOutlined /></Link>
@@ -57,24 +58,32 @@ const Products: React.FC = () => {
 
   return (
     <Flex vertical gap={16} style={{ flex: 1, width: "100%", padding: "16px" }}>
-      <Flex justify="space-between" align="center">
+      <Flex vertical gap={16}>
         <Typography.Title level={3}>Products</Typography.Title>
-        <Flex gap={32} align="center">
-          <Button type="primary" size="small" title="Add Product" icon={<PlusOutlined />} onClick={() => {
+        <Flex gap={32} justify="space-between">
+          <Button type="primary" title="Add Product" icon={<PlusOutlined />} onClick={() => {
             navigate("/products/add");
           }} />
-          <FilterSelect />
-          <SearchBoxInput />
+          <Flex gap={16} align="baseline">
+            <FilterSelect />
+            <SearchBoxInput />
+          </Flex>
         </Flex>
       </Flex>
       <Flex
         gap={16}
         style={{ flex: 1, width: "100%" }}
       >
-        <Table<Product> pagination={{ hideOnSinglePage: true }} columns={columns} dataSource={tempProducts.map((product: Product) => ({
-          key: product.id,
-          ...product,
-        }))} style={{ width: "100%" }} />
+        <Table<Product>
+          pagination={{ hideOnSinglePage: true }}
+          bordered
+          columns={columns}
+          scroll={{ x: 'max-content' }}
+          style={{ width: "100%" }}
+          dataSource={tempProducts.map((product: Product) => ({
+            key: product.id,
+            ...product,
+          }))} />
       </Flex>
     </Flex>
   );

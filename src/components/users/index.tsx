@@ -30,6 +30,7 @@ const Users: React.FC = () => {
     {
       title: 'Action',
       key: 'action',
+      fixed: 'right',
       render: (record) => (
         <Space size="middle">
           <Link to={`/users/${record.id}`} style={{ color: "lightblue" }}><EyeOutlined /></Link>
@@ -44,10 +45,10 @@ const Users: React.FC = () => {
 
   return (
     <Flex vertical gap={16} style={{ flex: 1, width: "100%", padding: "16px" }}>
-      <Flex justify="space-between" align="center">
+      <Flex vertical gap={16}>
         <Typography.Title level={3}>Users</Typography.Title>
-        <Flex gap={32} align="center">
-          <Button type="primary" size="small" title="Add User" icon={<PlusOutlined />} onClick={() => {
+        <Flex gap={32} justify="space-between">
+          <Button type="primary" title="Add User" icon={<PlusOutlined />} onClick={() => {
             navigate("/users/add");
           }} />
           <SearchBoxInput />
@@ -57,10 +58,16 @@ const Users: React.FC = () => {
         gap={16}
         style={{ flex: 1, width: "100%" }}
       >
-        <Table<User> pagination={{ hideOnSinglePage: true }} columns={columns} dataSource={usersTemp.map((user: User) => ({
-          key: user.id,
-          ...user,
-        }))} style={{ width: "100%" }} />
+        <Table<User>
+          pagination={{ hideOnSinglePage: true }}
+          bordered
+          columns={columns}
+          scroll={{ x: 'max-content' }}
+          style={{ width: "100%" }}
+          dataSource={usersTemp.map((user: User) => ({
+            key: user.id,
+            ...user,
+          }))} />
       </Flex>
     </Flex>
   );

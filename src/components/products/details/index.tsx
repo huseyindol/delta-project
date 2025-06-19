@@ -21,22 +21,24 @@ const ProductDetail: React.FC = () => {
 
   return product ? (
     <Flex vertical gap={16} style={{ flex: 1, width: "100%", padding: "16px" }}>
-      <Flex justify="space-between" align="center">
-        <Button
-          type="primary"
-          icon={<ArrowLeftOutlined />}
-          onClick={() => {
-            navigate("/products");
-          }}
-        ></Button>
+      <Flex vertical gap={16}>
         <Typography.Title level={3}>Product Detail</Typography.Title>
-        <Button
-          type="primary"
-          icon={<EditOutlined />}
-          onClick={() => {
-            navigate(`/products/${id}/edit`);
-          }}
-        ></Button>
+        <Flex gap={32} justify="space-between">
+          <Button
+            type="primary"
+            icon={<ArrowLeftOutlined />}
+            onClick={() => {
+              navigate("/products");
+            }}
+          ></Button>
+          <Button
+            type="primary"
+            icon={<EditOutlined />}
+            onClick={() => {
+              navigate(`/products/${id}/edit`);
+            }}
+          ></Button>
+        </Flex>
       </Flex>
       <Flex gap={16} style={{ margin: "0 16px" }}>
         <img src={product?.image} alt={product?.name} />
