@@ -10,7 +10,6 @@ const Home: React.FC = () => {
     width: "100%",
     padding: token.paddingLG,
     backgroundColor: token.colorBgLayout,
-    minHeight: "100vh",
   };
 
   const headerStyle = {

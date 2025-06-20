@@ -31,9 +31,13 @@ const items: MenuItem[] = [
 ];
 
 const BaseLayout: React.FC = () => {
-
   const [current, setCurrent] = useState("home");
   const navigate = useNavigate();
+
+  const containerStyle = {
+    height: '91vh',
+    zIndex: 1000,
+  }
 
   const handleClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
@@ -43,9 +47,9 @@ const BaseLayout: React.FC = () => {
   return (
     <Layout>
       <Header />
-      <Content style={{ flex: 1, width: "100%" }}>
+      <Content>
         <Layout>
-          <Sider width={250} style={{ zIndex: 1000 }} breakpoint="md" collapsedWidth="0" defaultCollapsed={true} zeroWidthTriggerStyle={{ top: -54 }}>
+          <Sider width={250} style={containerStyle} breakpoint="md" collapsedWidth="0" defaultCollapsed={true} zeroWidthTriggerStyle={{ top: -54 }}>
             <Menu
               theme="dark"
               mode="vertical"
