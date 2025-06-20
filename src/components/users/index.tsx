@@ -1,16 +1,21 @@
-import SearchBoxInput from "@/components/users/ui/filter/SearchBoxInput";
-import { deleteUser, selectUsers } from "@/store/userSlice";
+import SearchBoxInput from "@/components/shared/ui/filter/SearchBoxInput";
+import { deleteUser, filterUsers, selectUsers } from "@/store/userSlice";
 import { useAppDispatch, useAppSelector } from "@/utils/store/hooks";
 import type { User } from "@/utils/type/userType";
 import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Flex, Space, Table, Typography, type TableProps } from "antd";
-import React from "react";
+import React, { useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Users: React.FC = () => {
   const { usersTemp } = useAppSelector(selectUsers);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const handleUserSearch = useCallback((searchTerm: string) => {
+    dispatch(filterUsers({ searchTerm }));
+  }, [dispatch]);
+
   const columns: TableProps<User>['columns'] = [
     {
       title: 'Full Name',
@@ -51,7 +56,7 @@ const Users: React.FC = () => {
           <Button type="primary" title="Add User" icon={<PlusOutlined />} onClick={() => {
             navigate("/users/add");
           }} />
-          <SearchBoxInput />
+          <SearchBoxInput onSearch={handleUserSearch} placeholder="Search users" />
         </Flex>
       </Flex>
       <Flex

@@ -1,4 +1,5 @@
-import { ConfigProvider, Spin, theme } from "antd";
+import GlobalSpinner from "@/components/shared/ui/GlobalSpinner";
+import { ConfigProvider, theme } from "antd";
 import { Suspense } from "react";
 import { RouterProvider } from "react-router-dom";
 import "./assets/styles/reset.css";
@@ -9,10 +10,15 @@ function App() {
     <ConfigProvider
       theme={{
         algorithm: theme.darkAlgorithm,
-        token: {},
+        token: {
+          // Custom tokenlar da ekleyebilirsiniz
+          // colorPrimary: '#1890ff',
+          // borderRadiusLG: 12,
+          // paddingLG: 24,
+        },
       }}
     >
-      <Suspense fallback={<Spin size="large" className="global-spinner" />}>
+      <Suspense fallback={<GlobalSpinner />}>
         <RouterProvider router={router} />
       </Suspense>
     </ConfigProvider>

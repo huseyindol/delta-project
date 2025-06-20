@@ -41,11 +41,11 @@ const BaseLayout: React.FC = () => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout>
       <Header />
       <Content style={{ flex: 1, width: "100%" }}>
         <Layout>
-          <Sider width={250} style={{ height: "88vh", zIndex: 1000 }} breakpoint="md" collapsedWidth="0" defaultCollapsed={true} zeroWidthTriggerStyle={{ top: -54 }}>
+          <Sider width={250} style={{ zIndex: 1000 }} breakpoint="md" collapsedWidth="0" defaultCollapsed={true} zeroWidthTriggerStyle={{ top: -54 }}>
             <Menu
               theme="dark"
               mode="vertical"

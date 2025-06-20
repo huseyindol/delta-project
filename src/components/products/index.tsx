@@ -1,17 +1,22 @@
 import FilterSelect from "@/components/products/ui/filter/FilterCheckbox";
-import SearchBoxInput from "@/components/products/ui/filter/SearchBoxInput";
-import { deleteProduct, selectProducts } from "@/store/productSlice";
+import SearchBoxInput from "@/components/shared/ui/filter/SearchBoxInput";
+import { deleteProduct, filterProducts, selectProducts } from "@/store/productSlice";
 import { useAppDispatch, useAppSelector } from "@/utils/store/hooks";
 import type { Category, Product } from "@/utils/type/productsType";
 import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined } from "@ant-design/icons";
 import { Avatar, Button, Flex, Space, Table, Typography, type TableProps } from "antd";
-import React from "react";
+import React, { useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Products: React.FC = () => {
   const { tempProducts, categories } = useAppSelector(selectProducts);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const handleProductSearch = useCallback((searchTerm: string) => {
+    dispatch(filterProducts({ searchTerm }));
+  }, [dispatch]);
+
   const columns: TableProps<Product>['columns'] = [
     {
       title: 'Image',
@@ -66,7 +71,7 @@ const Products: React.FC = () => {
           }} />
           <Flex gap={16} align="baseline">
             <FilterSelect />
-            <SearchBoxInput />
+            <SearchBoxInput onSearch={handleProductSearch} placeholder="Search products" />
           </Flex>
         </Flex>
       </Flex>
