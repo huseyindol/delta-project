@@ -1,6 +1,6 @@
 # 🚀 Delta Project
 
-A modern React-based e-commerce management system built with TypeScript, featuring product and user management capabilities.
+A modern React-based e-commerce management system built with TypeScript, featuring product and user management capabilities with advanced design token system.
 
 ## 📋 Table of Contents
 
@@ -8,11 +8,19 @@ A modern React-based e-commerce management system built with TypeScript, featuri
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
+- [Design System](#design-system)
 - [API Endpoints](#api-endpoints)
 - [Scripts](#scripts)
 - [Contributing](#contributing)
 
 ## ✨ Features
+
+### 📊 Dashboard
+
+- **Statistics Overview**: Real-time statistics with visual indicators
+- **System Navigation**: Quick access to all management modules
+- **Design Token Integration**: Consistent theming across all components
+- **Responsive Cards**: Adaptive layout for different screen sizes
 
 ### 🛍️ Product Management
 
@@ -20,7 +28,7 @@ A modern React-based e-commerce management system built with TypeScript, featuri
 - **Product Details**: View detailed information about each product
 - **Product CRUD**: Add, edit, and delete products
 - **Category Filtering**: Filter products by categories
-- **Search**: Search products by name
+- **Advanced Search**: Debounced search with reusable components
 - **Favorites**: Mark products as favorites
 
 ### 👥 User Management
@@ -28,16 +36,19 @@ A modern React-based e-commerce management system built with TypeScript, featuri
 - **User Listing**: View all registered users
 - **User Details**: View complete user profiles
 - **User CRUD**: Add, edit, and delete users
-- **Search Users**: Find users by name or email
+- **Advanced Search**: Find users with optimized search functionality
 - **Form Validation**: Comprehensive form validation
 
 ### 🎨 UI/UX Features
 
-- **Modern Design**: Built with Ant Design components
+- **Modern Design**: Built with Ant Design components and design tokens
+- **Design Token System**: Consistent spacing, colors, typography, and animations
+- **Dark Theme**: Full dark theme support with automatic token switching
 - **Responsive Layout**: Mobile-first responsive design
-- **Loading States**: Smooth loading indicators
+- **Loading States**: Smooth loading indicators with design token styling
 - **Error Handling**: Comprehensive error boundaries
 - **Toast Notifications**: User-friendly notifications
+- **Performance Optimized**: useCallback hooks for preventing unnecessary re-renders
 
 ## 🛠️ Tech Stack
 
@@ -46,7 +57,7 @@ A modern React-based e-commerce management system built with TypeScript, featuri
 - **React 19** - Modern React with latest features
 - **TypeScript** - Type-safe development
 - **Vite** - Fast build tool and dev server
-- **Ant Design 5** - Professional UI components
+- **Ant Design 5** - Professional UI components with design token system
 - **React Router v7** - Client-side routing
 - **Redux Toolkit** - State management
 - **Redux Persist** - State persistence
@@ -115,17 +126,47 @@ delta-project/
 │   ├── components/       # React components
 │   │   ├── products/     # Product-related components
 │   │   ├── users/        # User-related components
-│   │   └── shared/       # Shared components
+│   │   ├── shared/       # Shared/reusable components
+│   │   │   └── ui/       # Shared UI components
+│   │   │       └── filter/ # Reusable filter components
+│   │   └── home/         # Dashboard components
 │   ├── layouts/          # Layout components
 │   ├── services/         # API services
 │   ├── store/            # Redux store
 │   ├── utils/            # Utility functions
-│   ├── hooks/            # Custom hooks
+│   ├── hooks/            # Custom hooks (useDebounce, etc.)
 │   └── assets/           # Source assets
 ├── package.json
 ├── vite.config.ts
 └── README.md
 ```
+
+## 🎨 Design System
+
+### Design Token Implementation
+
+The project uses Ant Design's design token system for consistent theming:
+
+#### Key Features
+
+- **Spacing Tokens**: `paddingLG`, `marginXL`, `marginMD` for consistent spacing
+- **Color Tokens**: `colorPrimary`, `colorBgLayout`, `colorTextHeading` for theming
+- **Typography Tokens**: `fontSizeHeading2`, `fontWeightStrong`, `lineHeight`
+- **Border & Shadow Tokens**: `borderRadiusLG`, `boxShadowSecondary`
+- **Motion Tokens**: `motionDurationMid` for smooth animations
+
+#### Benefits
+
+- **Theme Consistency**: Automatic dark/light theme switching
+- **Maintainability**: Centralized design system management
+- **Accessibility**: Built-in accessibility standards
+- **Responsive**: Adaptive design tokens for different screen sizes
+
+### Reusable Components
+
+- **SearchBoxInput**: Optimized search component with debouncing
+- **Error Boundaries**: Comprehensive error handling
+- **Loading States**: Consistent loading indicators
 
 ## 🔌 API Endpoints
 
@@ -178,6 +219,13 @@ The application uses JSON Server as a mock backend with the following endpoints:
 - Custom validation rules
 - Type-safe form submissions
 
+### Performance Optimization
+
+- **useCallback**: Preventing unnecessary re-renders
+- **Debounced Search**: Optimized search functionality
+- **Component Reusability**: Shared components reduce bundle size
+- **Lazy Loading**: Suspense with custom loading states
+
 ### Error Handling
 
 - Error boundaries for component-level errors
@@ -196,16 +244,26 @@ The application uses JSON Server as a mock backend with the following endpoints:
 
 - The project uses path aliases (`@/`) for cleaner imports
 - All components are written in TypeScript for type safety
-- Ant Design provides the UI component library
+- Ant Design provides the UI component library with design token system
 - JSON Server provides a quick backend solution for development
+- Design tokens ensure consistent theming across the application
+- useCallback hooks are used for performance optimization
 
 ## 🔧 Environment Setup
 
 Create a `.env` file in the root directory for environment variables:
 
 ```env
-VITE_API_URL=http://localhost:3000
+VITE_API_URL=http://localhost:3001
 ```
+
+## 🆕 Recent Updates
+
+- ✅ **Design Token System**: Comprehensive design token implementation
+- ✅ **Dashboard Enhancement**: Statistics cards and improved navigation
+- ✅ **Component Optimization**: Reusable SearchBoxInput with performance improvements
+- ✅ **Dark Theme**: Full dark theme support with automatic token switching
+- ✅ **Performance**: useCallback implementation for preventing infinite loops
 
 ---
 
